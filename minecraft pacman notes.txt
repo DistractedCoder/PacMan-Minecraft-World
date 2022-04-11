@@ -1,0 +1,225 @@
+pacman
+ArmorItems:[{id:"leather_boots",Count:1b,tag:{display:{color:16776960}}},{id:"leather_leggings",Count:1b,tag:{display:{color:16776960}}},{id:"leather_chestplate",Count:1b,tag:{display:{color:16776960}}},{id:"leather_helmet",Count:1b,tag:{display:{color:16776960}}}]
+clyde
+ArmorItems:[{id:"leather_boots",Count:1b,tag:{display:{color:16745472}}},{id:"leather_leggings",Count:1b,tag:{display:{color:16745472}}},{id:"leather_chestplate",Count:1b,tag:{display:{color:16745472}}},{id:"leather_helmet",Count:1b,tag:{display:{color:16745472}}}]
+blinky
+ArmorItems:[{id:"leather_boots",Count:1b,tag:{display:{color:16711680}}},{id:"leather_leggings",Count:1b,tag:{display:{color:16711680}}},{id:"leather_chestplate",Count:1b,tag:{display:{color:16711680}}},{id:"leather_helmet",Count:1b,tag:{display:{color:16711680}}}]
+
+>> intersections
+0 = none
+1 = yellow corner (1 way)
+2 = green T (2 way)
+3 = red + (3 way)
+
+>>if at intersection > set intersection to 1
+/execute as @e[name=clyde,scores={centered=0}] at @s if block ~ ~ ~2 minecraft:diamond_block run scoreboard players set @s intersection 1
+
+>> is not air
+execute unless block ~ ~ ~ minecraft:air
+
+>>bottom corner
+/execute as @e[name=clyde,scores={intersection=1}] at @s if block ~ ~ ~2 minecraft:diamond_block at @s unless block ~1 ~ ~ air at @s unless block ~ ~-1 ~ air
+
+
+
+
+>>
+clyde
+intersection = 1
+direction = 0    >>  up
+at @s if block ~ ~1 ~ air    >> no block above
+at @s if block ~-1 ~ ~ air    >> no block right
+at @s if block ~1 ~ ~ air    >> no block left
+>>>>>> if all 3 blocks free
+direction = rng (+5?)
+
+>>>>
+
+>>direction
+0/5 up
+1/6 right 
+2/7 down 
+3/8 left
+
+
+>> 1 - yellow corners (8)
+/execute as @e[name=clyde,scores={intersection=1,direction=0}] at @s if block ~-1 ~ ~ air run scoreboard players set @s direction 6
+/execute as @e[name=clyde,scores={intersection=1,direction=0}] at @s if block ~1 ~ ~ air run scoreboard players set @s direction 8
+
+/execute as @e[name=clyde,scores={intersection=1,direction=1}] at @s if block ~ ~1 ~ air run scoreboard players set @s direction 5
+/execute as @e[name=clyde,scores={intersection=1,direction=1}] at @s if block ~ ~-1 ~ air run scoreboard players set @s direction 7
+
+/execute as @e[name=clyde,scores={intersection=1,direction=2}] at @s if block ~-1 ~ ~ air run scoreboard players set @s direction 6
+/execute as @e[name=clyde,scores={intersection=1,direction=2}] at @s if block ~1 ~ ~ air run scoreboard players set @s direction 8
+
+/execute as @e[name=clyde,scores={intersection=1,direction=3}] at @s if block ~ ~1 ~ air run scoreboard players set @s direction 5
+/execute as @e[name=clyde,scores={intersection=1,direction=3}] at @s if block ~ ~-1 ~ air run scoreboard players set @s direction 7
+
+
+
+>>>>>>>>>>>>>>>> 2 - green 2 way (24)
+>> rng2  = 0 or 1
+>>up
+/execute as @e[name=clyde,scores={intersection=2,direction=0}] at @s if block ~ ~1 ~ air at @s if block ~-1 ~ ~ air run scoreboard players set @s[scores={rng2=0}] direction 5
+/execute as @e[name=clyde,scores={intersection=2,direction=0}] at @s if block ~ ~1 ~ air at @s if block ~-1 ~ ~ air run scoreboard players set @s[scores={rng2=1}] direction 6
+
+/execute as @e[name=clyde,scores={intersection=2,direction=0}] at @s if block ~-1 ~ ~ air at @s if block ~1 ~ ~ air run scoreboard players set @s[scores={rng2=0}] direction 6
+/execute as @e[name=clyde,scores={intersection=2,direction=0}] at @s if block ~-1 ~ ~ air at @s if block ~1 ~ ~ air run scoreboard players set @s[scores={rng2=1}] direction 8
+
+/execute as @e[name=clyde,scores={intersection=2,direction=0}] at @s if block ~ ~1 ~ air at @s if block ~1 ~ ~ air run scoreboard players set @s[scores={rng2=0}] direction 5
+/execute as @e[name=clyde,scores={intersection=2,direction=0}] at @s if block ~ ~1 ~ air at @s if block ~1 ~ ~ air run scoreboard players set @s[scores={rng2=1}] direction 8
+
+>> right
+/execute as @e[name=clyde,scores={intersection=2,direction=1}] at @s if block ~-1 ~ ~ air at @s if block ~ ~-1 ~ air run scoreboard players set @s[scores={rng2=0}] direction 6
+/execute as @e[name=clyde,scores={intersection=2,direction=1}] at @s if block ~-1 ~ ~ air at @s if block ~ ~-1 ~ air run scoreboard players set @s[scores={rng2=1}] direction 7
+
+/execute as @e[name=clyde,scores={intersection=2,direction=1}] at @s if block ~-1 ~ ~ air at @s if block ~ ~1 ~ air run scoreboard players set @s[scores={rng2=0}] direction 5
+/execute as @e[name=clyde,scores={intersection=2,direction=1}] at @s if block ~-1 ~ ~ air at @s if block ~ ~1 ~ air run scoreboard players set @s[scores={rng2=1}] direction 6
+
+/execute as @e[name=clyde,scores={intersection=2,direction=1}] at @s if block ~ ~1 ~ air at @s if block ~ ~-1 ~ air run scoreboard players set @s[scores={rng2=0}] direction 5
+/execute as @e[name=clyde,scores={intersection=2,direction=1}] at @s if block ~ ~1 ~ air at @s if block ~ ~-1 ~ air run scoreboard players set @s[scores={rng2=1}] direction 7
+
+>>down
+/execute as @e[name=clyde,scores={intersection=2,direction=2}] at @s if block ~-1 ~ ~ air at @s if block ~ ~-1 ~ air run scoreboard players set @s[scores={rng2=0}] direction 6
+/execute as @e[name=clyde,scores={intersection=2,direction=2}] at @s if block ~-1 ~ ~ air at @s if block ~ ~-1 ~ air run scoreboard players set @s[scores={rng2=1}] direction 7
+
+/execute as @e[name=clyde,scores={intersection=2,direction=2}] at @s if block ~-1 ~ ~ air at @s if block ~1 ~ ~ air run scoreboard players set @s[scores={rng2=0}] direction 6
+/execute as @e[name=clyde,scores={intersection=2,direction=2}] at @s if block ~-1 ~ ~ air at @s if block ~1 ~ ~ air run scoreboard players set @s[scores={rng2=1}] direction 8
+
+/execute as @e[name=clyde,scores={intersection=2,direction=2}] at @s if block ~1 ~ ~ air at @s if block ~ ~-1 ~ air run scoreboard players set @s[scores={rng2=0}] direction 7
+/execute as @e[name=clyde,scores={intersection=2,direction=2}] at @s if block ~1 ~ ~ air at @s if block ~ ~-1 ~ air run scoreboard players set @s[scores={rng2=1}] direction 8
+
+>>left
+/execute as @e[name=clyde,scores={intersection=2,direction=3}] at @s if block ~1 ~ ~ air at @s if block ~ ~-1 ~ air run scoreboard players set @s[scores={rng2=0}] direction 7
+/execute as @e[name=clyde,scores={intersection=2,direction=3}] at @s if block ~1 ~ ~ air at @s if block ~ ~-1 ~ air run scoreboard players set @s[scores={rng2=1}] direction 8
+
+/execute as @e[name=clyde,scores={intersection=2,direction=3}] at @s if block ~ ~1 ~ air at @s if block ~1 ~ ~ air run scoreboard players set @s[scores={rng2=0}] direction 5
+/execute as @e[name=clyde,scores={intersection=2,direction=3}] at @s if block ~ ~1 ~ air at @s if block ~1 ~ ~ air run scoreboard players set @s[scores={rng2=1}] direction 8
+
+/execute as @e[name=clyde,scores={intersection=2,direction=3}] at @s if block ~ ~1 ~ air at @s if block ~ ~-1 ~ air run scoreboard players set @s[scores={rng2=0}] direction 5
+/execute as @e[name=clyde,scores={intersection=2,direction=3}] at @s if block ~ ~1 ~ air at @s if block ~ ~-1 ~ air run scoreboard players set @s[scores={rng2=1}] direction 7
+
+
+
+>>>>>>>>>>>>>>>> 3 - red 3 way (12)
+>> rng  = 0 or 1 or 2
+/execute as @e[name=clyde,scores={intersection=3,direction=0}] at @s run scoreboard players set @s[scores={rng=0}] direction 5
+/execute as @e[name=clyde,scores={intersection=3,direction=0}] at @s run scoreboard players set @s[scores={rng=1}] direction 6
+/execute as @e[name=clyde,scores={intersection=3,direction=0}] at @s run scoreboard players set @s[scores={rng=2}] direction 8
+
+/execute as @e[name=clyde,scores={intersection=3,direction=1}] at @s run scoreboard players set @s[scores={rng=0}] direction 5
+/execute as @e[name=clyde,scores={intersection=3,direction=1}] at @s run scoreboard players set @s[scores={rng=1}] direction 6
+/execute as @e[name=clyde,scores={intersection=3,direction=1}] at @s run scoreboard players set @s[scores={rng=2}] direction 7
+
+/execute as @e[name=clyde,scores={intersection=3,direction=2}] at @s run scoreboard players set @s[scores={rng=0}] direction 6
+/execute as @e[name=clyde,scores={intersection=3,direction=2}] at @s run scoreboard players set @s[scores={rng=1}] direction 7
+/execute as @e[name=clyde,scores={intersection=3,direction=2}] at @s run scoreboard players set @s[scores={rng=2}] direction 8
+
+/execute as @e[name=clyde,scores={intersection=3,direction=3}] at @s run scoreboard players set @s[scores={rng=0}] direction 5
+/execute as @e[name=clyde,scores={intersection=3,direction=3}] at @s run scoreboard players set @s[scores={rng=1}] direction 7
+/execute as @e[name=clyde,scores={intersection=3,direction=3}] at @s run scoreboard players set @s[scores={rng=2}] direction 8
+
+
+
+
+>>>>>>>>>>>blinky (16)
+/execute as @e[name=blinky,scores={intersection=1..}] at @s run summon minecraft:armor_stand ~ ~1 ~ {CustomName:'{"text":"marker0"}',Invulnerable:1b,NoGravity:1b,Tags:["marker"]}
+/execute as @e[name=blinky,scores={intersection=1..}] at @s run summon minecraft:armor_stand ~-1 ~ ~ {CustomName:'{"text":"marker1"}',Invulnerable:1b,NoGravity:1b,Tags:["marker"]}
+/execute as @e[name=blinky,scores={intersection=1..}] at @s run summon minecraft:armor_stand ~ ~-1 ~ {CustomName:'{"text":"marker2"}',Invulnerable:1b,NoGravity:1b,Tags:["marker"]}
+/execute as @e[name=blinky,scores={intersection=1..}] at @s run summon minecraft:armor_stand ~1 ~ ~ {CustomName:'{"text":"marker3"}',Invulnerable:1b,NoGravity:1b,Tags:["marker"]}
+
+/execute as @e[name=blinky,scores={intersection=1..,direction=0}] at @s run kill @e[name=marker2]
+/execute as @e[name=blinky,scores={intersection=1..,direction=1}] at @s run kill @e[name=marker3]
+/execute as @e[name=blinky,scores={intersection=1..,direction=2}] at @s run kill @e[name=marker0]
+/execute as @e[name=blinky,scores={intersection=1..,direction=3}] at @s run kill @e[name=marker1]
+
+/execute as @e[tag=marker] at @s unless block ~ ~ ~ air at @s run kill @s
+/execute as @e[name=marker0] at @s run scoreboard players set @s direction 5
+/execute as @e[name=marker1] at @s run scoreboard players set @s direction 6
+/execute as @e[name=marker2] at @s run scoreboard players set @s direction 7
+/execute as @e[name=marker3] at @s run scoreboard players set @s direction 8
+
+/execute as @e[name=playerTarget] at @s run scoreboard players operation @s direction = @e[limit=1,sort=nearest,tag=marker] direction
+/execute as @e[name=blinky] at @s run scoreboard players operation @s direction = @e[name=playerTarget] direction
+
+
+
+>>>>>>>>>>joystick
+/execute at @p if block ~ ~-1 ~ minecraft:magenta_glazed_terracotta[facing=north] at @e[name=player] run scoreboard players set @e[name=player] joystick 0
+
+
+>>>>pacman
+if centered = 1, direction = x, joystick = inverse x -> go joystick (no block check since its not centered)
+if centered = 0, joystick =x, check can go in direction -> go joystikc 
+
+/execute as @e[name=player,scores={centered=1,direction=0,joystick=2}] at @s run scoreboard players set @s[name=player] direction 7
+/execute as @e[name=player,scores={centered=1,direction=1,joystick=3}] at @s run scoreboard players set @s[name=player] direction 8
+/execute as @e[name=player,scores={centered=1,direction=2,joystick=0}] at @s run scoreboard players set @s[name=player] direction 5
+/execute as @e[name=player,scores={centered=1,direction=3,joystick=1}] at @s run scoreboard players set @s[name=player] direction 6
+
+/execute as @e[name=player,scores={centered=0,joystick=0}] at @s if block ~ ~1 ~ air at @s run scoreboard players set @s[name=player] direction 5
+/execute as @e[name=player,scores={centered=0,joystick=1}] at @s if block ~-1 ~ ~ air at @s run scoreboard players set @s[name=player] direction 6
+/execute as @e[name=player,scores={centered=0,joystick=2}] at @s if block ~ ~-1 ~ air at @s run scoreboard players set @s[name=player] direction 7
+/execute as @e[name=player,scores={centered=0,joystick=3}] at @s if block ~1 ~ ~ air at @s run scoreboard players set @s[name=player] direction 8
+
+/execute as @e[name=player,scores={centered=0,direction=0}] at @s unless block ~ ~1 ~ air at @s run scoreboard players set @s[name=player] direction -1
+/execute as @e[name=player,scores={centered=0,direction=1}] at @s unless block ~-1 ~ ~ air at @s run scoreboard players set @s[name=player] direction -1
+/execute as @e[name=player,scores={centered=0,direction=2}] at @s unless block ~ ~-1 ~ air at @s run scoreboard players set @s[name=player] direction -1
+/execute as @e[name=player,scores={centered=0,direction=3}] at @s unless block ~1 ~ ~ air at @s run scoreboard players set @s[name=player] direction -1
+
+
+
+>>>>> pacdot
+/summon armor_stand 130.5 28.00 221.25 {Invisible:0b,NoBasePlate:1b,NoGravity:1b,ShowArms:1b,Small:1b,Rotation:[90f],ArmorItems:[{},{},{},{}],HandItems:[{},{id:"snowball",Count:1b}],CustomName:'{"text":"pacDot"}',Pose:{LeftArm:[269f,270f,0f]}}
+/summon armor_stand 130.5 28.00 221.25 {Invisible:0b,NoBasePlate:1b,NoGravity:1b,ShowArms:1b,Small:1b,Rotation:[90f],ArmorItems:[{},{},{},{}],HandItems:[{},{id:"raw_gold",Count:1b}],CustomName:'{"text":"powerDot"}',Pose:{LeftArm:[269f,270f,0f]}}
+
+/execute as @e[name=spawnMarker] at @s run summon minecraft:armor_stand ~ ~-1 ~ {CustomName:'{"text":"dotSpawn"}',Invulnerable:1b,NoGravity:1b,Invisible:0b}
+
+/execute as @e[name=dotSpawn] at @s unless block ~ ~ ~2 air at @s unless block ~ ~ ~2 minecraft:blue_wool at @s unless block ~ ~ ~2 diamond_block at @s unless block ~ ~ ~2 iron_block at @s run summon minecraft:armor_stand ~ ~ ~ {Invisible:1b,NoBasePlate:1b,NoGravity:1b,ShowArms:1b,Small:1b,Rotation:[90f],ArmorItems:[{},{},{},{}],HandItems:[{},{id:"snowball",Count:1b}],CustomName:'{"text":"pacDot"}',Pose:{LeftArm:[269f,270f,0f]}}
+
+>> backup
+/execute as @e[name=spawnMarker] at @s run summon minecraft:armor_stand ~-1 ~ ~ {CustomName:'{"text":"dotSpawn"}',Invulnerable:1b,NoGravity:1b,Invisible:1b}
+/execute as @e[name=spawnMarker] at @s run summon minecraft:armor_stand ~-11 ~ ~ {CustomName:'{"text":"dotSpawn"}',Invulnerable:1b,NoGravity:1b,Invisible:1b}
+
+>>>>player continued
+/execute as @e[name=player,scores={centered=0}] at @s run kill @e[distance=..0.5,limit=1,name=pacDot]
+
+>>>>powerdot collected
+/execute as @e[limit=1,sort=nearest,name=clyde,scores={rng=0}] at @s run summon armor_stand 129.5 39.7 221.25 {Invisible:0b,NoBasePlate:1b,NoGravity:1b,ShowArms:1b,Small:1b,Rotation:[90f],ArmorItems:[{},{},{},{}],HandItems:[{},{id:"glow_berries",Count:1b}],CustomName:'{"text":"berries"}',Pose:{LeftArm:[269f,270f,0f]},Tags:["bonus"]}
+/execute as @e[limit=1,sort=nearest,name=clyde,scores={rng=1}] at @s run summon armor_stand 129.5 39.7 221.25 {Invisible:0b,NoBasePlate:1b,NoGravity:1b,ShowArms:1b,Small:1b,Rotation:[90f],ArmorItems:[{},{},{},{}],HandItems:[{},{id:"apple",Count:1b}],CustomName:'{"text":"apple"}',Pose:{LeftArm:[269f,270f,0f]},Tags:["bonus"]}
+/execute as @e[limit=1,sort=nearest,name=clyde,scores={rng=2}] at @s run summon armor_stand 129.5 39.7 221.25 {Invisible:0b,NoBasePlate:1b,NoGravity:1b,ShowArms:1b,Small:1b,Rotation:[90f],ArmorItems:[{},{},{},{}],HandItems:[{},{id:"cake",Count:1b}],CustomName:'{"text":"cake"}',Pose:{LeftArm:[269f,270f,0f]},Tags:["bonus"]}
+
+
+>>>>visual joystick
+up /fill 149 45 221 147 47 221
+right /fill 146 44 221 144 42 221
+down /fill 149 41 221 147 39 221
+
+left
+/execute as @e[name=player,scores={joystick=3}] at @s run fill 152 42 221 150 44 221 minecraft:red_wool replace minecraft:light_gray_wool
+/execute as @e[name=player,scores={joystick=..2}] at @s run fill 152 42 221 150 44 221 minecraft:light_gray_wool replace minecraft:red_wool
+
+>>on
+/execute as @e[name=player,scores={joystick=0}] at @s run fill 149 45 221 147 47 221 minecraft:red_wool replace minecraft:light_gray_wool
+/execute as @e[name=player,scores={joystick=1}] at @s run fill 146 44 221 144 42 221 minecraft:red_wool replace minecraft:light_gray_wool
+/execute as @e[name=player,scores={joystick=2}] at @s run fill 149 41 221 147 39 221 minecraft:red_wool replace minecraft:light_gray_wool
+/execute as @e[name=player,scores={joystick=3}] at @s run fill 152 42 221 150 44 221 minecraft:red_wool replace minecraft:light_gray_wool
+
+>>off
+/execute as @e[name=player,scores={joystick=-1}] at @s run fill 149 45 221 147 47 221 minecraft:light_gray_wool replace minecraft:red_wool
+/execute as @e[name=player,scores={joystick=1..}] at @s run fill 149 45 221 147 47 221 minecraft:light_gray_wool replace minecraft:red_wool
+
+/execute as @e[name=player,scores={joystick=..0}] at @s run fill 146 44 221 144 42 221 minecraft:light_gray_wool replace minecraft:red_wool
+/execute as @e[name=player,scores={joystick=2..}] at @s run fill 146 44 221 144 42 221 minecraft:light_gray_wool replace minecraft:red_wool
+
+/execute as @e[name=player,scores={joystick=..1}] at @s run fill 149 41 221 147 39 221 minecraft:light_gray_wool replace minecraft:red_wool
+/execute as @e[name=player,scores={joystick=3}] at @s run fill 149 41 221 147 39 221 minecraft:light_gray_wool replace minecraft:red_wool
+
+/execute as @e[name=player,scores={joystick=..2}] at @s run fill 152 42 221 150 44 221 minecraft:light_gray_wool replace minecraft:red_wool
+
+/execute as @e[name=player,scores={joystick=0..}] at @s run setblock 148 43 221 minecraft:red_wool
+/execute as @e[name=player,scores={joystick=-1}] at @s run setblock 148 43 221 minecraft:light_gray_wool
+
+
+>>hit detection
+/execute as @e[name=player] at @s run scoreboard players operation @s gotHit = @e[distance=..0.5,limit=1,sort=nearest,tag=ghost] gotHit
