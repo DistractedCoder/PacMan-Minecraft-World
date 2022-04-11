@@ -15,3 +15,5 @@
 1. Either press the button on the floating joystick area or follow all the glowstone arrows and press the button on the ground.
 2. Use the joystick by walking over the corresponding direction.
 
+## What if I want to make something similar?
+* Well I highly recommend downloading the world and messing around with it but if this is not an option, I have attached 'minecraft pacman notes' which contains a bunch of the commands used. Good Luck
